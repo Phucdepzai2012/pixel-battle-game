@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pixel Art Battle Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+        #game {
+            width: 800px;
+            height: 600px;
+            border: 2px solid #000;
+            position: relative;
+            margin: 0 auto;
+            background-image: url('path/to/pixel-background.png'); /* Example background */
+            background-size: cover;
+        }
+        .character {
+            width: 40px;
+            height: 40px;
+            position: absolute;
+        }
+        /* Additional CSS for characters and game elements */
+    </style>
+</head>
+<body>
+    <h1>Welcome to Pixel Art Battle Game</h1>
+    <div id="character-selection">
+        <h2>Select Your Character</h2>
+        <!-- Character options will go here -->
+    </div>
+    <div id="game"></div>
+    <script>
+        // JavaScript for character selection and LAN server connection
+        function setupGame() {
+            // Character selection logic
+            const characters = ['character1.png', 'character2.png', 'character3.png'];
+            const selectionDiv = document.getElementById('character-selection');
+            characters.forEach(character => {
+                const img = document.createElement('img');
+                img.src = character;
+                img.classList.add('character');
+                img.onclick = function() { selectCharacter(character); };
+                selectionDiv.appendChild(img);
+            });
+        }
+
+        function selectCharacter(character) {
+            
+            alert('Character selected: ' + character);
+            // Additional logic for starting the game with selected character
+        }
+
+        function connectToServer() {
+            // Logic for connecting to LAN server
+            alert('Connecting to LAN server...');
+            // Add your connection logic here
+        }
+
+        window.onload = setupGame;
+    </script>
+</body>
+</html>
