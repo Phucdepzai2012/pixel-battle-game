@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1a1a1a;
+            color: #eaeaea;
+            font-family: 'Arial', sans-serif;
+        }
+        #clock {
+            text-align: center;
+            border: 1px solid #eaeaea;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #333333;
+        }
+        select {
+            margin: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        h1 {
+            font-size: 3em;
+        }
+        p {
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div id="clock">
+        <h1 id="time"></h1>
+        <p id="date"></p>
+        <select id="timezoneSelector"></select>
+    </div>
+    <script>
+        const timezones = {
+            "New York": "America/New_York",
+            "London": "Europe/London",
+            "Paris": "Europe/Paris",
+            "India": "Asia/Kolkata",
+            "Tokyo": "Asia/Tokyo",
+            "Sydney": "Australia/Sydney",
+            "Hanoi": "Asia/Bangkok",
+            "Beijing": "Asia/Shanghai"
+        };
+
+        const timezoneSelector = document.getElementById('timezoneSelector');
+        Object.keys(timezones).forEach(zone => {
+            const option = document.createElement('option');
+            option.value = timezones[zone];
+            option.textContent = zone;
+            timezoneSelector.appendChild(option);
+        });
+
+        function updateClock() {
+            const selectedTimezone = timezoneSelector.value;
+            const options = { timeZone: selectedTimezone, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+            const dateTimeString = new Intl.DateTimeFormat('en-US', options).format(new Date());
+            const [date, time] = dateTimeString.split(', ');
+            document.getElementById('date').textContent = date;
+            document.getElementById('time').textContent = time;
+        }
+
+        timezoneSelector.addEventListener('change', updateClock);
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call
+    </script>
+</body>
+</html>
